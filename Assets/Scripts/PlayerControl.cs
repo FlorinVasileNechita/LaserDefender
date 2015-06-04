@@ -7,12 +7,18 @@ public class PlayerControl : MonoBehaviour {
 	public GameObject laserPrefab;
 	public Transform childTo;
 
+	public LevelManager levelManager;
+
 	private Vector3 leftBottom;
 	private Vector3 rightTop;
 	private float spriteWidth;
 	private float spriteHeight;
 
 	private float fireDelay = 0;
+
+	//Player Health
+	public float health = 100f;
+
 
 	//Movement Speed. We want this to be "constant". We'll lock it down permanently once we determine it.
 	//This is a lot higher because we made it frame independent.
@@ -80,5 +86,19 @@ public class PlayerControl : MonoBehaviour {
 		Vector3 laserPosition = position;
 		laserPosition.y += spriteHeight;
 		laser.transform.position = laserPosition;
+	}
+
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.name == "enemyLaser") {
+			health -= 5f;
+		}
+		CheckHealth ();
+	}
+
+	void CheckHealth(){
+		if (health <= 0) {
+			levelManager.LoadLevel("Win Screen");
+		}
 	}
 }

@@ -46,11 +46,14 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\FormationWidth.cs" />
      <Compile Include="Assets\Scripts\GameConstants.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\MusicPlayer.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
+     <Compile Include="Assets\Scripts\Position.cs" />
      <Compile Include="Assets\Scripts\enemyControlScript.cs" />
+     <Compile Include="Assets\Scripts\enemyLaserControl.cs" />
      <Compile Include="Assets\Scripts\enemySpawner.cs" />
      <Compile Include="Assets\Scripts\playerLaserControl.cs" />
  <Reference Include="UnityEngine.UI">

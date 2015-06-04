@@ -21,7 +21,7 @@ public class playerLaserControl : MonoBehaviour {
 
 	//Destroying any laser that hits the Destroyer
 	void OnTriggerEnter2D(Collider2D collision){
-		if (collision.gameObject.name != "PlayerShip") {
+		if (collision.gameObject.name == "enemy1Prefab" || collision.gameObject.name=="Destroyer // Enemy Spawner") {
 			Destroy (gameObject);
 		}
 	}

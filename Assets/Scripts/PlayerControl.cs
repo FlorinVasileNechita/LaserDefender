@@ -88,12 +88,19 @@ public class PlayerControl : MonoBehaviour {
 		laser.transform.position = laserPosition;
 	}
 
-	void OnCollisionEnter2D(Collision2D collision)
-	{
-		if (collision.gameObject.name == "enemyLaser") {
-			health -= 5f;
+	void OnTriggerEnter2D(Collider2D col){
+		enemyLaserControl enemyLaser = col.gameObject.GetComponent<enemyLaserControl> ();
+		enemyControlScript enemyShip = col.gameObject.GetComponent<enemyControlScript> ();
+		if (enemyLaser) {
+			Destroy(col.gameObject);
+			health -= GameConstants.ENEMY_LASER_DAMAGE;
+			CheckHealth();
 		}
-		CheckHealth ();
+		if (enemyShip) {
+			Destroy(col.gameObject);
+			health -= GameConstants.ENEMY_SHIP_DAMAGE;
+			CheckHealth();
+		}
 	}
 
 	void CheckHealth(){
@@ -101,4 +108,5 @@ public class PlayerControl : MonoBehaviour {
 			levelManager.LoadLevel("Win Screen");
 		}
 	}
+
 }

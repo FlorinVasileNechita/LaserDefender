@@ -14,6 +14,8 @@ public class GameConstants : MonoBehaviour {
 	//Controlling the rate at which the laser fires.
 	public static float FIRE_DELAY = 0.25f;
 
+	public static float DESTROYER_BUFFER = 1f;
+
 
 	//Enemy Movement
 	public static float ENEMY_HORZ_SPEED = 5f;
@@ -25,7 +27,7 @@ public class GameConstants : MonoBehaviour {
 	public static float ENEMY_SHIP_DAMAGE = 20f;
 
 	//Enemy Firing
-	public static float ENEMY_FIRE_RATE = 1f;
+	public static float ENEMY_FIRE_RATE = 0.5f;
 	public static int NUM_OF_FORMATIONS = 3;
 
 

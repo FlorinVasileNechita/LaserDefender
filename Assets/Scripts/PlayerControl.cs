@@ -2,9 +2,10 @@
 using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
-
-	Vector3 position;
+	
+	Vector3 position; //The vector3 used to control the ships position.
 	public GameObject laserPrefab;
+	public GameObject explosionPrefab;
 	public Transform childTo;
 
 	public LevelManager levelManager;
@@ -80,6 +81,9 @@ public class PlayerControl : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// Fires the laser.
+	/// </summary>
 	void fireLaser(){
 		GameObject laser = Instantiate (laserPrefab) as GameObject;
 		laser.transform.parent = childTo;
@@ -88,25 +92,44 @@ public class PlayerControl : MonoBehaviour {
 		laser.transform.position = laserPosition;
 	}
 
+
+	/// <summary>
+	/// Checks for collisions and decrements health when appropriate
+	/// </summary>
+	/// <param name="col">Collider/param>
 	void OnTriggerEnter2D(Collider2D col){
 		enemyLaserControl enemyLaser = col.gameObject.GetComponent<enemyLaserControl> ();
 		enemyControlScript enemyShip = col.gameObject.GetComponent<enemyControlScript> ();
 		if (enemyLaser) {
 			Destroy(col.gameObject);
 			health -= GameConstants.ENEMY_LASER_DAMAGE;
-			CheckHealth();
+			checkAlive();
 		}
 		if (enemyShip) {
 			Destroy(col.gameObject);
 			health -= GameConstants.ENEMY_SHIP_DAMAGE;
-			CheckHealth();
+			checkAlive();
 		}
 	}
 
-	void CheckHealth(){
+	/// <summary>
+	/// Checks if Alive.
+	/// </summary>
+	void checkAlive(){
 		if (health <= 0) {
-			levelManager.LoadLevel("Win Screen");
+			GameObject explosion = Instantiate(explosionPrefab) as GameObject;
+			explosion.transform.position = this.transform.position;
+			Destroy (this.GetComponent<SpriteRenderer>());
+			Destroy (this.GetComponent<PolygonCollider2D>());
+			Invoke("loadNextLevel",1);
 		}
+	}
+
+	/// <summary>
+	/// Loads the next level.
+	/// </summary>
+	void loadNextLevel(){
+		levelManager.LoadLevel("Win Screen");
 	}
 
 }

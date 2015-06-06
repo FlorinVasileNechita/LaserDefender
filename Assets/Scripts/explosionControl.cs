@@ -8,7 +8,7 @@ public class explosionControl : MonoBehaviour {
 	
 	}
 	
-	// Update is called once per frame
+	// Makes it so the explosion deletes itself when the particle display is complete.
 	void Update () {
 		if (!GetComponent<ParticleSystem> ().IsAlive()) {
 			Destroy(this.gameObject);

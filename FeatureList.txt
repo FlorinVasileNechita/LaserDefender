@@ -1,0 +1,43 @@
+Things that should be implemented into Laser Defender before I can consider it feature complete
+-----------------------------------------------------------------------------------------------
+
+- Explosions
+	- Animations for the explosions
+	- Sounds for the explosions
+
+- More Formations
+	- Currently: 2 Implemented
+	- Goal: 7
+
+- A variety of enemies
+	- Currently: 1
+	- Goal: 5
+		-Each one does a different amount of damage
+		-Perhaps attacks differently? (ie the formation spins rather than stays stagnate)
+
+- Bosses
+	- Minimum: One?
+	- It kind of depends on how many levels I get.
+	
+- Levels
+	- Minimum: 3
+	- What differentiates a level?
+		- This is something that I am going to have to consider. The first two thoughts are time or score.
+		- Tougher enemies
+
+- Scoring System
+
+- Repeated Spawning of various formations
+
+- The Garbage Collector for ships that go off the screen
+
+- A way to display the health of the player.
+	- Not sure if I want to go with a quick and easy text display or a health bar.
+	- Health bar sounds interesting but takes up a lot of real estate
+	
+- Global High Scores
+
+- Power Ups
+	- In the very least a health pack
+	- Double Laser
+	

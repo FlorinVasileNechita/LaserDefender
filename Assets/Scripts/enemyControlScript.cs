@@ -5,6 +5,8 @@ public class enemyControlScript : MonoBehaviour {
 
 	public Transform childTo;
 	public GameObject enemyLaserPrefab;
+	public GameObject explosionPrefab;
+	public GameObject enemyDestroyer;
 
 	private float xmin;
 	private float xmax;
@@ -32,11 +34,16 @@ public class enemyControlScript : MonoBehaviour {
 		Vector3 leftBottom = Camera.main.ViewportToWorldPoint (new Vector3 (0,0,distance));
 		Vector3 rightTop = Camera.main.ViewportToWorldPoint (new Vector3 (1,1,distance));
 
+		enemyDestroyer = GameObject.Find ("EnemyDestroyer");
+
 		if (this.tag == "PentagonFormation") {
 			width = GameConstants.PENTAGON_WIDTH / 2;
 		} else if (this.tag == "VFormation") {
 			width = GameConstants.V_WIDTH/2;
+		} else if (this.tag == "WFormation") {
+			width = GameConstants.W_WIDTH/2;
 		}
+
 
 		xmin = leftBottom.x + width; xmax = rightTop.x - width;
 		ymax = rightTop.y; ymin = leftBottom.y;
@@ -94,8 +101,14 @@ public class enemyControlScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		playerLaserControl playerLaser = col.gameObject.GetComponent<playerLaserControl> ();
+		Destroyer enemyDestroyer = col.gameObject.GetComponent<Destroyer>();
 		if (playerLaser) {
-			Destroy(col.gameObject);
+			GameObject explosion = Instantiate(explosionPrefab) as GameObject;
+			explosion.transform.position = this.transform.position;
+			Destroy (col.gameObject);
+			Destroy (this.gameObject);
+		}
+		if (enemyDestroyer) {
 			Destroy(this.gameObject);
 		}
 	}

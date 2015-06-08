@@ -21,7 +21,7 @@ public class enemyControlScript : MonoBehaviour {
 	private float width;
 
 	//Controls whether or not the enemy ships can fire lasers. It insures that they are on the screen when they start firing
-	public bool canFire = false;
+	public bool canFire;
 
 	//Width and height of the sprite.
 	private float spriteWidth;
@@ -32,7 +32,7 @@ public class enemyControlScript : MonoBehaviour {
 
 	//These are used for movement of the ship within the formation
 	Vector3 shipPosition;
-	public bool moveRight = true;
+	public bool moveRight;
 	
 
 	void Start () {
@@ -64,6 +64,9 @@ public class enemyControlScript : MonoBehaviour {
 		//Creating a Vector3 position
 		shipPosition = this.transform.position;
 		startX = shipPosition.x;
+
+		canFire = false;
+
 	}
 	
 	// Update is called once per frame

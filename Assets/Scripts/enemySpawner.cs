@@ -20,6 +20,8 @@ public class enemySpawner : MonoBehaviour {
 	public GameObject WFormation;
 	private GameObject formation; //We need this to randomize which formation comes later
 
+	private bool chosenDirection;
+
 	public GameObject enemyShipPrefab; //The Enemy ship prefab.
 	//TODO: Add more enemies.
 
@@ -43,12 +45,15 @@ public class enemySpawner : MonoBehaviour {
 	/// </summary>
 	void spawnEnemies(){
 		formation = getRandomFormation ();
+		chosenDirection = getDirection ();
 		Transform transform = (Instantiate (formation) as GameObject).transform;
 		foreach (Transform child in transform) {
 			GameObject enemyShip = Instantiate (enemyShipPrefab) as GameObject;
 			enemyShip.transform.parent = childTo;
 			enemyShip.transform.position = child.transform.position;
 			enemyShip.tag = formation.gameObject.name;
+
+			enemyShip.GetComponent<enemyControlScript>().moveRight = chosenDirection;
 			Destroy(child.gameObject);
 
 		}
@@ -68,6 +73,15 @@ public class enemySpawner : MonoBehaviour {
 			return vFormation;
 		default:
 			return pentagonFormation;
+		}
+	}
+
+	bool getDirection(){
+		float r = Random.value;
+		if (r >= 0.5) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

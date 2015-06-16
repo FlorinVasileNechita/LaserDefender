@@ -20,6 +20,8 @@ public class GameConstants : MonoBehaviour {
 	//Enemy Movement
 	public static float ENEMY_HORZ_SPEED = 5f;
 	public static float ENEMY_VERT_SPEED = 0.5f;
+	public static float ENEMY2_HORZ_SPEED = 5f;
+	public static float ENEMY2_VERT_SPEED = 5f;
 	public static float ENEMY_SPAWN_RATE = 7f;
 
 	//Enemy Damage

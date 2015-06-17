@@ -3,6 +3,11 @@ using System.Collections;
 
 public class enemy2Control : MonoBehaviour {
 
+	public Transform childTo;
+	public GameObject enemyLaserPrefab;
+	public GameObject explosionPrefab;
+	private float health;
+	private AudioSource hit;
 	private Animator animator;
 	private Vector2 dir;
 	private Random rand;
@@ -16,9 +21,12 @@ public class enemy2Control : MonoBehaviour {
 	private float minY;
 	private bool startMoving;
 
+
 	// Use this for initialization
 	void Start () {
+		//Locking the ships movement until the animation is finished.
 		startMoving = false;
+
 		//Capturing the camera perspective so we can restrict it later
 		float distance = transform.position.z - Camera.main.transform.position.z;
 		Vector3 leftBottom = Camera.main.ViewportToWorldPoint (new Vector3 (0,0,distance));
@@ -36,13 +44,19 @@ public class enemy2Control : MonoBehaviour {
 
 		//Establishing the bounds of the ships movement.
 		maxX = rightTop.x - spriteWidth/2;
-		minY = leftBottom.y + spriteHeight/2;
 		minX = leftBottom.x + spriteWidth/2;
 		maxY = rightTop.y - spriteHeight/2;
+		minY = leftBottom.y + spriteHeight/2 + 2;
+
 
 		//Establishing the first direction
 		dir = getNewDirection();
 		position = this.transform.position;
+
+		//Setting up the Health
+		health = 50f;
+		hit = this.GetComponent<AudioSource> ();
+	
 	}
 	
 	// Update is called once per frame
@@ -50,13 +64,13 @@ public class enemy2Control : MonoBehaviour {
 
 		/*	The way this code segment is going to work is as follows:
 		 * 		Every update cycle, it will look at the startMoving flag
-		 * 		This flag is instantiated as false because I want that intro movement
-		 * 		Once that intro animation has been played, the animation will move into "Idle"
-		 * 		
+		 * 		This flag is instantiated as false because I don't want the ship to move until it's done animating
+		 * 		Once that intro animation has been played, the animation will move into "Idle" state
+		 * 		It's at this point that startMoving will be changed to "true" and the animator will be deleted from the object.
 		 */
 		if (startMoving) {
 			timeEllapsed += Time.deltaTime;
-			if (timeEllapsed > 1.5f) {
+			if (timeEllapsed > GameConstants.ENEMY2_MOVEMENT_DELAY) {
 				dir = getNewDirection ();
 				timeEllapsed = 0f;
 			}
@@ -69,7 +83,13 @@ public class enemy2Control : MonoBehaviour {
 			position.x += dir.x * Time.deltaTime;
 			position.y += dir.y * Time.deltaTime;
 			this.transform.position = position;
-			Debug.Log (this.transform.position);
+
+			//Firing
+			float probability = Time.deltaTime * GameConstants.ENEMY_FIRE_RATE;
+			if (Random.value < probability) {
+				fireLaser();
+				probability = 0;
+			}
 		} else {
 			if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Idle")) {
 				startMoving = true;
@@ -78,11 +98,48 @@ public class enemy2Control : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Gets the new direction.
+	/// </summary>
+	/// <returns>The new direction.</returns>
 	Vector2 getNewDirection(){
 		Vector2 newDir;
-		newDir.x = Random.Range (-5f, 5f);
-		newDir.y = Random.Range (-5f, 5f);
-		Debug.Log (newDir);
+		newDir.x = Random.Range (GameConstants.ENEMY2_MIN,GameConstants.ENEMY2_MAX);
+		newDir.y = Random.Range (GameConstants.ENEMY2_MIN,GameConstants.ENEMY2_MAX);
 		return newDir;
 	}
+
+	/// <summary>
+	/// Fires the laser.
+	/// </summary>
+	void fireLaser(){
+		childTo = GameObject.Find ("LaserHolder").transform;
+		GameObject laser = Instantiate (enemyLaserPrefab) as GameObject;
+		laser.transform.parent = childTo;
+		Vector3 laserPosition = this.transform.position;
+		laserPosition.y -= spriteHeight;
+		laser.transform.position = laserPosition;
+	}
+
+	/// <summary>
+	/// Raises the trigger enter2d event.
+	/// Both when the player laser hits the ship and when they hit the garbage collector
+	/// </summary>
+	/// <param name="col">Collider</param>
+	void OnTriggerEnter2D(Collider2D col){
+		playerLaserControl playerLaser = col.gameObject.GetComponent<playerLaserControl> ();
+		Destroyer enemyDestroyer = col.gameObject.GetComponent<Destroyer>();
+		if (playerLaser) {
+			Destroy (col.gameObject); //This destroys the player laser.
+			hit.Play ();
+			health -= GameConstants.PLAYER_DAMAGE;
+			if (health <=0){
+				GameObject explosion = Instantiate(explosionPrefab) as GameObject;
+				explosion.transform.position = this.transform.position;
+				Destroy (this.gameObject);
+			}
+		}
+	}
+
+
 }

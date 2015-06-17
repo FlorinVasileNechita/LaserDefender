@@ -13,6 +13,7 @@ public class GameConstants : MonoBehaviour {
 
 	//Controlling the rate at which the laser fires.
 	public static float FIRE_DELAY = 0.25f;
+	public static float PLAYER_DAMAGE = 10f;
 
 	public static float DESTROYER_BUFFER = 1f;
 
@@ -20,9 +21,12 @@ public class GameConstants : MonoBehaviour {
 	//Enemy Movement
 	public static float ENEMY_HORZ_SPEED = 5f;
 	public static float ENEMY_VERT_SPEED = 0.5f;
-	public static float ENEMY2_HORZ_SPEED = 5f;
-	public static float ENEMY2_VERT_SPEED = 5f;
 	public static float ENEMY_SPAWN_RATE = 7f;
+
+	//Second Enemy Movemnt
+	public static float ENEMY2_MIN = -5f;
+	public static float ENEMY2_MAX = 5f;
+	public static float ENEMY2_MOVEMENT_DELAY = 1.5f;
 
 	//Enemy Damage
 	public static float ENEMY_LASER_DAMAGE = 10.0f;
@@ -37,6 +41,5 @@ public class GameConstants : MonoBehaviour {
 	public static float PENTAGON_WIDTH = 3.0f;
 	public static float V_WIDTH = 5.0f;
 	public static float W_WIDTH = 7.0f;
-
-
+	
 }

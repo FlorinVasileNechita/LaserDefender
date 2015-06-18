@@ -54,12 +54,12 @@
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Position.cs" />
      <Compile Include="Assets\Scripts\enemy2Control.cs" />
+     <Compile Include="Assets\Scripts\enemy2Spawner.cs" />
      <Compile Include="Assets\Scripts\enemyControlScript.cs" />
      <Compile Include="Assets\Scripts\enemyLaserControl.cs" />
      <Compile Include="Assets\Scripts\enemySpawner.cs" />
      <Compile Include="Assets\Scripts\explosionControl.cs" />
      <Compile Include="Assets\Scripts\playerLaserControl.cs" />
-     <Compile Include="Assets\enemy2Spawner.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

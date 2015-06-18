@@ -61,7 +61,7 @@ public class enemy2Control : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		Debug.Log (minY);
 		/*	The way this code segment is going to work is as follows:
 		 * 		Every update cycle, it will look at the startMoving flag
 		 * 		This flag is instantiated as false because I don't want the ship to move until it's done animating

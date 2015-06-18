@@ -15,6 +15,8 @@ public class PlayerControl : MonoBehaviour {
 	private float spriteWidth;
 	private float spriteHeight;
 
+	private AudioSource laserHit;
+
 	private float fireDelay = 0;
 
 	//Player Health
@@ -36,6 +38,8 @@ public class PlayerControl : MonoBehaviour {
 		//Getting the width and height of the sprite so we can make the ship display properly.
 		spriteWidth = GetComponent<Renderer> ().bounds.size.x / 2;
 		spriteHeight = GetComponent<Renderer> ().bounds.size.y / 2;
+
+		laserHit = this.GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -101,6 +105,7 @@ public class PlayerControl : MonoBehaviour {
 		enemyLaserControl enemyLaser = col.gameObject.GetComponent<enemyLaserControl> ();
 		enemyControlScript enemyShip = col.gameObject.GetComponent<enemyControlScript> ();
 		if (enemyLaser) {
+			laserHit.Play();
 			Destroy(col.gameObject);
 			health -= GameConstants.ENEMY_LASER_DAMAGE;
 			checkAlive();

@@ -76,6 +76,10 @@ public class enemySpawner : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Gets the direction.
+	/// </summary>
+	/// <returns><c>true</c>, if direction was gotten, <c>false</c> otherwise.</returns>
 	bool getDirection(){
 		float r = Random.value;
 		if (r >= 0.5) {
@@ -84,4 +88,6 @@ public class enemySpawner : MonoBehaviour {
 			return false;
 		}
 	}
+
+
 }

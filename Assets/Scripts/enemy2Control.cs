@@ -61,7 +61,6 @@ public class enemy2Control : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (minY);
 		/*	The way this code segment is going to work is as follows:
 		 * 		Every update cycle, it will look at the startMoving flag
 		 * 		This flag is instantiated as false because I don't want the ship to move until it's done animating
@@ -69,6 +68,9 @@ public class enemy2Control : MonoBehaviour {
 		 * 		It's at this point that startMoving will be changed to "true" and the animator will be deleted from the object.
 		 */
 		if (startMoving) {
+			if(!this.gameObject.GetComponent<PolygonCollider2D>().enabled){
+				this.gameObject.GetComponent<PolygonCollider2D>().enabled = true;
+			}
 			timeEllapsed += Time.deltaTime;
 			if (timeEllapsed > GameConstants.ENEMY2_MOVEMENT_DELAY) {
 				dir = getNewDirection ();
@@ -91,6 +93,7 @@ public class enemy2Control : MonoBehaviour {
 				probability = 0;
 			}
 		} else {
+			this.gameObject.GetComponent<PolygonCollider2D>().enabled = false;
 			if (animator.GetCurrentAnimatorStateInfo (0).IsName ("Idle")) {
 				startMoving = true;
 				Destroy (animator);

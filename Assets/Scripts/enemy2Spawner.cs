@@ -25,7 +25,6 @@ public class enemy2Spawner : MonoBehaviour {
 			GameObject enemy2Ship = Instantiate (enemy2Prefab) as GameObject;
 			enemy2Ship.transform.parent = childTo;
 			if(enemy2Ship.transform.position != position){
-				Debug.Log ("Changed");
 				enemy2Ship.transform.position = position;
 			}
 		}

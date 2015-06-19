@@ -9,7 +9,7 @@ public class ScoreKeeper : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		playerScore = 490;
+		playerScore = 500;
 		scoreText = gameObject.GetComponent<Text> ();
 		scoreText.text = "Score: 0";
 	}

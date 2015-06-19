@@ -28,7 +28,7 @@ public class GameConstants : MonoBehaviour {
 	public static float ENEMY2_MAX = 5f;
 	public static float ENEMY2_MOVEMENT_DELAY = 1.5f;
 	public static int ENEMY2_MIN_SPAWN_SCORE = 500;
-	public static float ENEMY2_SPAWN_DELAY = 1.5f;
+	public static float ENEMY2_SPAWN_DELAY = 2.5f;
 
 	//Enemy Damage
 	public static float ENEMY_LASER_DAMAGE = 10.0f;

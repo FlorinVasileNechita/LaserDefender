@@ -27,12 +27,9 @@ public class enemy2Spawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		score = scorekeeper.getScore ();
-		Debug.Log (score);
 		if (score >= GameConstants.ENEMY2_MIN_SPAWN_SCORE) {
 			timeDelay += Time.deltaTime;
-			Debug.Log ("Entered Loop 1");
 			if (childTo.childCount < 3 && timeDelay >= GameConstants.ENEMY2_SPAWN_DELAY) {
-				Debug.Log ("Entered Loop 2");
 				position.x = Random.Range (GameConstants.ENEMY2_MIN, GameConstants.ENEMY2_MAX);
 				position.y = Random.Range (-2.5f, GameConstants.ENEMY2_MAX); //TODO: FIX THIS. Enemies can spawn below Y threshold
 				created.transform.position = position;

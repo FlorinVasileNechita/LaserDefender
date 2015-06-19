@@ -103,6 +103,7 @@ public class PlayerControl : MonoBehaviour {
 	/// <param name="col">Collider/param>
 	void OnTriggerEnter2D(Collider2D col){
 		enemyLaserControl enemyLaser = col.gameObject.GetComponent<enemyLaserControl> ();
+		enemy2Control enemy2Ship = col.gameObject.GetComponent<enemy2Control> ();
 		enemyControlScript enemyShip = col.gameObject.GetComponent<enemyControlScript> ();
 		if (enemyLaser) {
 			laserHit.Play();
@@ -117,6 +118,14 @@ public class PlayerControl : MonoBehaviour {
 			health -= GameConstants.ENEMY_SHIP_DAMAGE;
 			checkAlive();
 		}
+		if (enemy2Ship) {
+			GameObject explosion = Instantiate(explosionPrefab) as GameObject;
+			explosion.transform.position = this.transform.position;
+			Destroy(col.gameObject);
+			health -= GameConstants.ENEMY2_SHIP_DAMAGE;
+			checkAlive();
+		}
+
 	}
 
 	/// <summary>

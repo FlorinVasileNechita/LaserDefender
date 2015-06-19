@@ -7,7 +7,6 @@ public class enemy2Spawner : MonoBehaviour {
 	public GameObject enemy2Prefab;
 	public Transform childTo;
 	private GameObject created;
-	private ScoreKeeper scorekeeper;
 	private float timeDelay;
 	private int score;
 
@@ -20,13 +19,11 @@ public class enemy2Spawner : MonoBehaviour {
 		created.name = "Second Enemy Ships";
 		childTo = created.transform;
 		timeDelay = 0f;
-		scorekeeper = GameObject.Find ("Score").GetComponent<ScoreKeeper> ();
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		score = scorekeeper.getScore ();
+		score = ScoreKeeper.getScore ();
 		if (score >= GameConstants.ENEMY2_MIN_SPAWN_SCORE) {
 			timeDelay += Time.deltaTime;
 			if (childTo.childCount < 3 && timeDelay >= GameConstants.ENEMY2_SPAWN_DELAY) {

@@ -147,7 +147,7 @@ public class enemy2Control : MonoBehaviour {
 				Destroy (this.gameObject);
 			}
 		}
+
+		//TODO: Make the enemy ships not overlap each other. (Bounce)
 	}
-
-
 }

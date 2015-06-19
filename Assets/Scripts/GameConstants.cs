@@ -33,6 +33,7 @@ public class GameConstants : MonoBehaviour {
 	//Enemy Damage
 	public static float ENEMY_LASER_DAMAGE = 10.0f;
 	public static float ENEMY_SHIP_DAMAGE = 20f;
+	public static float ENEMY2_SHIP_DAMAGE = 20f;
 
 	//Enemy Values
 	public static int ENEMY_ONE_VALUE = 10;

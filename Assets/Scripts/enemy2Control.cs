@@ -6,6 +6,7 @@ public class enemy2Control : MonoBehaviour {
 	public Transform childTo;
 	public GameObject enemyLaserPrefab;
 	public GameObject explosionPrefab;
+	public ScoreKeeper scoreboard;
 	private float health;
 	private AudioSource hit;
 	private Animator animator;
@@ -56,6 +57,9 @@ public class enemy2Control : MonoBehaviour {
 		//Setting up the Health
 		health = 50f;
 		hit = this.GetComponent<AudioSource> ();
+
+		//Getting the ScoreKeeper
+		scoreboard = GameObject.Find ("Score").GetComponent<ScoreKeeper>();
 	
 	}
 	
@@ -139,6 +143,7 @@ public class enemy2Control : MonoBehaviour {
 			if (health <=0){
 				GameObject explosion = Instantiate(explosionPrefab) as GameObject;
 				explosion.transform.position = this.transform.position;
+				scoreboard.addScore(GameConstants.ENEMY_TWO_VALUE);
 				Destroy (this.gameObject);
 			}
 		}

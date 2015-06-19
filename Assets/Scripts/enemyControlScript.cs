@@ -12,6 +12,8 @@ public class enemyControlScript : MonoBehaviour {
 	public GameObject explosionPrefab;
 	public GameObject enemyDestroyer;
 
+	//ScoreKeeper
+	public ScoreKeeper scoreboard;
 
 	//Bounds of the window and width of the respective formation
 	private float xmin;
@@ -41,8 +43,9 @@ public class enemyControlScript : MonoBehaviour {
 		Vector3 leftBottom = Camera.main.ViewportToWorldPoint (new Vector3 (0,0,distance));
 		Vector3 rightTop = Camera.main.ViewportToWorldPoint (new Vector3 (1,1,distance));
 
-		//Initializes the destroyer
+		//Initializes the destroyer and scorekeeper
 		enemyDestroyer = GameObject.Find ("EnemyDestroyer");
+		scoreboard = GameObject.Find ("Score").GetComponent<ScoreKeeper> ();
 
 		//Figures out what formation the ship is in and gets it's width (for movement purposes)
 		if (this.tag == "PentagonFormation") {
@@ -124,6 +127,7 @@ public class enemyControlScript : MonoBehaviour {
 			GameObject explosion = Instantiate(explosionPrefab) as GameObject;
 			explosion.transform.position = this.transform.position;
 			Destroy (col.gameObject);
+			scoreboard.addScore(GameConstants.ENEMY_ONE_VALUE);
 			Destroy (this.gameObject);
 		}
 		if (enemyDestroyer) {

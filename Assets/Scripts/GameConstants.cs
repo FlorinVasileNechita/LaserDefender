@@ -20,17 +20,23 @@ public class GameConstants : MonoBehaviour {
 
 	//Enemy Movement
 	public static float ENEMY_HORZ_SPEED = 5f;
-	public static float ENEMY_VERT_SPEED = 0.5f;
-	public static float ENEMY_SPAWN_RATE = 7f;
+	public static float ENEMY_VERT_SPEED = 1.5f;
+	public static float ENEMY_SPAWN_RATE = 3f;
 
 	//Second Enemy Movemnt
 	public static float ENEMY2_MIN = -5f;
 	public static float ENEMY2_MAX = 5f;
 	public static float ENEMY2_MOVEMENT_DELAY = 1.5f;
+	public static int ENEMY2_MIN_SPAWN_SCORE = 500;
+	public static float ENEMY2_SPAWN_DELAY = 1.5f;
 
 	//Enemy Damage
 	public static float ENEMY_LASER_DAMAGE = 10.0f;
 	public static float ENEMY_SHIP_DAMAGE = 20f;
+
+	//Enemy Values
+	public static int ENEMY_ONE_VALUE = 10;
+	public static int ENEMY_TWO_VALUE = 50;
 
 	//Enemy Firing
 	public static float ENEMY_FIRE_RATE = 0.5f;

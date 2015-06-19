@@ -25,7 +25,7 @@ public class BackgroundSize : MonoBehaviour {
 	}
 	
 	void setTransform(float minX,float minY,float maxX, float maxY){
-		this.gameObject.transform.position = new Vector3 (0, maxY + 1, 0);
+		this.gameObject.transform.position = new Vector3 (0, maxY + 1, 5); //It has to be 5 because we want it to be behind the items
 		this.gameObject.transform.localScale = new Vector3 (Mathf.Abs (minX) + maxX, 1,1);
 	}
 }

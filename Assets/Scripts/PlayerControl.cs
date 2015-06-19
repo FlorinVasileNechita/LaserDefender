@@ -111,6 +111,8 @@ public class PlayerControl : MonoBehaviour {
 			checkAlive();
 		}
 		if (enemyShip) {
+			GameObject explosion = Instantiate(explosionPrefab) as GameObject;
+			explosion.transform.position = this.transform.position;
 			Destroy(col.gameObject);
 			health -= GameConstants.ENEMY_SHIP_DAMAGE;
 			checkAlive();
